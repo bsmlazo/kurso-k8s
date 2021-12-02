@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: "Se cambia la imagen a fake"
+  name: deploy-test
+  labels:
+    app: deploy-front
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pod-label-front
+  template:
+    metadata:
+      labels:
+        app: pod-label-front
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+          - containerPort: 8080
